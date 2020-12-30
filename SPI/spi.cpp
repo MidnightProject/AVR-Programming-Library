@@ -1,6 +1,11 @@
 ﻿#include <avr/io.h>
 #include "spi.h"
 
+SPI::SPI()
+{
+	
+}
+
 SPI::SPI(int8_t ch)
 {
 	#if defined( __AVR_ATmega328PB__ )
@@ -97,6 +102,11 @@ SPI::SPI(int8_t ch, uint8_t mode, uint8_t dataMode, uint8_t bitOrder, uint32_t c
 	setClock(clock);
 	
 	enable();
+}
+
+void SPI::setChannel(int8_t ch)
+{
+	this->ch = ch;
 }
 
 void SPI::setMode(uint8_t mode)

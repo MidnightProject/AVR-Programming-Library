@@ -140,9 +140,11 @@ class SPI
 {
 	private: int8_t ch;
 	
+	public: SPI();
 	public: SPI(int8_t ch);
 	public: SPI(int8_t ch, uint8_t mode, uint8_t bitOrder, uint8_t dataMode);
 	public: SPI(int8_t ch, uint8_t mode, uint8_t bitOrder, uint8_t dataMode,  uint32_t clock);
+	public: void setChannel(int8_t ch);
 	public: void setMode(uint8_t mode);
 	public: void setDataMode(uint8_t dataMode);
 	public: void setClock();
