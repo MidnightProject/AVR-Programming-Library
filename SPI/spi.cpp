@@ -3,7 +3,7 @@
 
 SPI::SPI()
 {
-	
+
 }
 
 SPI::SPI(int8_t ch)
@@ -22,7 +22,7 @@ SPI::SPI(int8_t ch)
 		}
 	#endif
 		
-	this->ch = ch;
+	setChannel(ch);
 	
 	#if F_SPI0
 		if (this->ch == 0)
@@ -34,7 +34,7 @@ SPI::SPI(int8_t ch)
 	#if F_SPI1
 		if (this->ch == 1)
 		{
-			SPI.setClock();
+			setClock();
 		}
 	#endif
 }
@@ -55,7 +55,7 @@ SPI::SPI(int8_t ch, uint8_t mode, uint8_t bitOrder, uint8_t dataMode)
 		}
 	#endif
 	
-	this->ch = ch;
+	setChannel(ch);
 	
 	#if F_SPI0
 	if (this->ch == 0)
@@ -67,7 +67,7 @@ SPI::SPI(int8_t ch, uint8_t mode, uint8_t bitOrder, uint8_t dataMode)
 	#if F_SPI1
 	if (this->ch == 1)
 	{
-		SPI.setClock();
+		setClock();
 	}
 	#endif
 	
@@ -102,6 +102,11 @@ SPI::SPI(int8_t ch, uint8_t mode, uint8_t dataMode, uint8_t bitOrder, uint32_t c
 	setClock(clock);
 	
 	enable();
+}
+
+int8_t SPI::getChannel()
+{
+	return ch;
 }
 
 void SPI::setChannel(int8_t ch)
