@@ -22,19 +22,19 @@ SPI::SPI(int8_t ch)
 		}
 	#endif
 		
-	setChannel(ch);
+	SetChannel(ch);
 	
 	#if F_SPI0
 		if (this->ch == 0)
 		{
-			setClock();
+			SetClock();
 		}
 	#endif
 	
 	#if F_SPI1
 		if (this->ch == 1)
 		{
-			setClock();
+			SetClock();
 		}
 	#endif
 }
@@ -55,27 +55,27 @@ SPI::SPI(int8_t ch, uint8_t mode, uint8_t bitOrder, uint8_t dataMode)
 		}
 	#endif
 	
-	setChannel(ch);
+	SetChannel(ch);
 	
 	#if F_SPI0
 	if (this->ch == 0)
 	{
-		setClock();
+		SetClock();
 	}
 	#endif
 	
 	#if F_SPI1
 	if (this->ch == 1)
 	{
-		setClock();
+		SetClock();
 	}
 	#endif
 	
-	setMode(mode);
-	setBitOrder(bitOrder);
-	setDataMode(dataMode);
+	SetMode(mode);
+	SetBitOrder(bitOrder);
+	SetDataMode(dataMode);
 	
-	enable();
+	Enable();
 }
 
 SPI::SPI(int8_t ch, uint8_t mode, uint8_t dataMode, uint8_t bitOrder, uint32_t clock)
@@ -96,25 +96,25 @@ SPI::SPI(int8_t ch, uint8_t mode, uint8_t dataMode, uint8_t bitOrder, uint32_t c
 	
 	this->ch = ch;
 	
-	setMode(mode);
-	setBitOrder(bitOrder);
-	setDataMode(dataMode);
-	setClock(clock);
+	SetMode(mode);
+	SetBitOrder(bitOrder);
+	SetDataMode(dataMode);
+	SetClock(clock);
 	
-	enable();
+	Enable();
 }
 
-int8_t SPI::getChannel()
+int8_t SPI::GetChannel()
 {
 	return ch;
 }
 
-void SPI::setChannel(int8_t ch)
+void SPI::SetChannel(int8_t ch)
 {
 	this->ch = ch;
 }
 
-void SPI::setMode(uint8_t mode)
+void SPI::SetMode(uint8_t mode)
 {		
 	if (mode == SPI_MASTER)
 	{					
@@ -180,7 +180,7 @@ void SPI::setMode(uint8_t mode)
 	}
 }
 
-void SPI::setDataMode(uint8_t dataMode)
+void SPI::SetDataMode(uint8_t dataMode)
 {	
 	#if defined( __AVR_ATmega328PB__ )	
 		SPCR(ch) &= ~SPI_MODE_MASK;
@@ -193,7 +193,7 @@ void SPI::setDataMode(uint8_t dataMode)
 	#endif
 }
 
-void SPI::setClock()
+void SPI::SetClock()
 {		
 	#if defined( __AVR_ATmega328PB__ )
 		SPCR(ch) &= ~SPI_CLOCK_MASK;
@@ -274,7 +274,7 @@ void SPI::setClock()
 	#endif
 }
 
-void SPI::setClock(uint32_t clock)
+void SPI::SetClock(uint32_t clock)
 {
 	#if defined( __AVR_ATmega328PB__ )
 		SPCR(ch) &= ~SPI_CLOCK_MASK;
@@ -327,7 +327,7 @@ void SPI::setClock(uint32_t clock)
 	#endif
 }
 
-void SPI::setBitOrder(uint8_t bitOrder)
+void SPI::SetBitOrder(uint8_t bitOrder)
 {
 	#if defined( __AVR_ATmega328PB__ )
 		(bitOrder == MSBFIRST) ? SPCR(ch) |= (1 << DORD) : SPCR(ch) &= ~(1 << DORD);
@@ -338,7 +338,7 @@ void SPI::setBitOrder(uint8_t bitOrder)
 	#endif
 }
 
-void SPI::enable()
+void SPI::Enable()
 {	
 	#if defined( __AVR_ATmega328PB__ )
 		SPCR(ch) |= (1 << SPE);
@@ -349,7 +349,7 @@ void SPI::enable()
 	#endif
 }
 
-void SPI::disable()
+void SPI::Disable()
 {
 	#if defined( __AVR_ATmega328PB__ )
 		SPCR(ch) &= ~(1 << SPE);
@@ -360,7 +360,7 @@ void SPI::disable()
 	#endif
 }
 
-void SPI::sendByte( uint8_t data )
+void SPI::SendByte( uint8_t data )
 {
 	SPDR(ch) = data;
 	asm volatile("nop");
@@ -368,8 +368,8 @@ void SPI::sendByte( uint8_t data )
 	while( !(SPSR(ch) & (1 << SPIF)) );		// wait SPIF = 1
 }
 
-uint8_t SPI::readByte()
+uint8_t SPI::ReadByte()
 {
-	sendByte( 0xFF );
+	SendByte( 0xFF );
 	return ( SPDR(ch) );
 }

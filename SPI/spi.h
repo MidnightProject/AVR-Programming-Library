@@ -144,17 +144,17 @@ class SPI
 	public: SPI(int8_t ch);
 	public: SPI(int8_t ch, uint8_t mode, uint8_t bitOrder, uint8_t dataMode);
 	public: SPI(int8_t ch, uint8_t mode, uint8_t bitOrder, uint8_t dataMode,  uint32_t clock);
-	public: int8_t getChannel();
-	public: void setChannel(int8_t ch);
-	public: void setMode(uint8_t mode);
-	public: void setDataMode(uint8_t dataMode);
-	public: void setClock();
-	public: void setClock(uint32_t clock);
-	public: void setBitOrder(uint8_t bitOrder);
-	public: void enable();
-	public: void disable();
-	public: void sendByte( uint8_t data );
-	public: uint8_t readByte();
+	public: int8_t GetChannel();
+	public: void SetChannel(int8_t ch);
+	public: void SetMode(uint8_t mode);
+	public: void SetDataMode(uint8_t dataMode);
+	public: void SetClock();
+	public: void SetClock(uint32_t clock);
+	public: void SetBitOrder(uint8_t bitOrder);
+	public: void Enable();
+	public: void Disable();
+	public: void SendByte( uint8_t data );
+	public: uint8_t ReadByte();
 };
 
 #endif /* SPI_H_ */
